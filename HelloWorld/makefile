@@ -1,7 +1,7 @@
 #DEFINO MI ENTORNO
 
 #programa
-MAIN=hello
+MAIN=hello.out
 #cofigo fuente
 SOURCE=hello.c
 
@@ -30,7 +30,7 @@ hello.i:
 	cpp $(SOURCE) > hello.i
 	
 clean:
-	rm hello.i hello.s hello.o hello
+	rm hello.i hello.s hello.o $(MAIN)
 	@echo "Se eliminaron todos los archivos intermedios"
 	
 rebuild:
