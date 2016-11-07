@@ -1,0 +1,24 @@
+digraph G {
+    EN_PROGRAMA -> INICIO_COMENTARIO  [label="/ | E"];
+    EN_PROGRAMA -> EN_STRING  [label="\" | \""];
+    EN_PROGRAMA -> EN_CARACTER  [label="' | '"];
+    EN_PROGRAMA -> EN_PROGRAMA  [label=" other |  other"];
+    INICIO_COMENTARIO -> EN_LINEA_COMENTARIO  [label="/ | E"];
+    INICIO_COMENTARIO -> EN_BLOQUE_COMENTARIO  [label="* | E"];
+    INICIO_COMENTARIO -> EN_PROGRAMA  [label=" other | / other"];
+    EN_BLOQUE_COMENTARIO -> FIN_COMENTARIO  [label="* | E"];
+    EN_BLOQUE_COMENTARIO -> EN_BLOQUE_COMENTARIO  [label=" other | E"];
+    EN_LINEA_COMENTARIO -> EN_PROGRAMA  [label="\\n | space"];
+    EN_LINEA_COMENTARIO -> EN_LINEA_COMENTARIO  [label=" other | E"];
+    FIN_COMENTARIO -> EN_PROGRAMA  [label="/ | space"];
+    FIN_COMENTARIO -> FIN_COMENTARIO  [label="* | E"];
+    FIN_COMENTARIO -> EN_BLOQUE_COMENTARIO  [label=" other | E"];
+    EN_STRING -> EN_ESCAPE_STRING  [label="\\ | \\"];
+    EN_STRING -> EN_PROGRAMA  [label="\" | \""];
+    EN_STRING -> EN_STRING  [label=" other |  other"];
+    EN_CARACTER -> EN_ESCAPE_CARACTER  [label="\\ | \\"];
+    EN_CARACTER -> EN_CARACTER  [label=" other |  other"];
+    EN_CARACTER -> EN_PROGRAMA  [label="' | '"];
+    EN_ESCAPE_STRING -> EN_STRING  [label=" other |  other"];
+    EN_ESCAPE_CARACTER -> EN_CARACTER  [label=" other |  other"];
+}

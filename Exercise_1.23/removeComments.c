@@ -58,14 +58,14 @@ int main(void) {
 						putchar(currentChar);
 				};
 				break; 
-			case EN_BLOQUE_COMENTARIO: break;
+			case EN_BLOQUE_COMENTARIO:
 				switch (currentChar){
 					case '*':
 						currentState = FIN_COMENTARIO;
 						break;
 				};
 				break; 
-			case EN_LINEA_COMENTARIO: break;
+			case EN_LINEA_COMENTARIO:
 				switch (currentChar){
 					case '\n':
 						currentState = EN_PROGRAMA;
@@ -73,12 +73,17 @@ int main(void) {
 						break;
 				};
 				break; 
-			case FIN_COMENTARIO: break;
+			case FIN_COMENTARIO:
 				switch (currentChar){
 					case '/':
 						currentState = EN_PROGRAMA;
 						putchar(' ');
 						break;
+					case '*':
+						currentState = FIN_COMENTARIO;
+						break;
+					default:
+						currentState = EN_BLOQUE_COMENTARIO;
 				};
 				break;
 			case EN_STRING:
@@ -91,9 +96,11 @@ int main(void) {
 						currentState = EN_PROGRAMA;
 						putchar(currentChar);
 						break;
+					default:
+						putchar(currentChar);
 				};
 				break;
-			case EN_CARACTER: break;
+			case EN_CARACTER:
 				switch (currentChar){
 					case '\\':
 						currentState = EN_ESCAPE_CARACTER;
@@ -103,14 +110,16 @@ int main(void) {
 						currentState = EN_PROGRAMA;
 						putchar(currentChar);
 						break;
+					default:
+						putchar(currentChar);
 				};
 				break;
-			case EN_ESCAPE_STRING: break;
-				currentState = EN_PROGRAMA;
+			case EN_ESCAPE_STRING:
+				currentState = EN_STRING;
 				putchar(currentChar);
 				break;
-			case EN_ESCAPE_CARACTER: break;
-				currentState = EN_PROGRAMA;
+			case EN_ESCAPE_CARACTER:
+				currentState = EN_CARACTER;
 				putchar(currentChar);
 				break;
 			default:
