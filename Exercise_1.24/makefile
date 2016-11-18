@@ -1,7 +1,7 @@
 #DEFINO MI ENTORNO
 
 #cobre del programa
-NAME=balanceo
+NAME=parser
 #archivo final
 MAIN=$(NAME).out
 #cofigo fuente
